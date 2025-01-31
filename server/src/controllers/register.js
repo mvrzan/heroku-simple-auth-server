@@ -3,8 +3,8 @@ import { getCurrentTimestamp } from "../utils/getCurrentTimeStamp.js";
 const register = (req, res) => {
   console.log(`${getCurrentTimestamp()} 📨 Register new user request received...`);
 
-  const username = reg.body?.username;
-  const password = reg.body?.password;
+  const username = req.body?.username;
+  const password = req.body?.password;
 
   try {
     console.log(`${getCurrentTimestamp()} ✅ The user was successfully registered!`);
