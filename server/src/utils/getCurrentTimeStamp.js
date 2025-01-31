@@ -6,6 +6,8 @@ export const getCurrentTimestamp = () => {
   const hours = now.getHours();
   const minutes = now.getMinutes();
   const seconds = now.getSeconds();
-  const milliseconds = Math.round(now.getMilliseconds() / 10);
+  const milliseconds = Math.round(now.getMilliseconds() / 10)
+    .toString()
+    .padStart(2, "0");
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}:${milliseconds}`;
 };
