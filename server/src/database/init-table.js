@@ -1,7 +1,7 @@
 import postgresPool from "./postgres-connection.js";
 import { getCurrentTimestamp } from "../utils/getCurrentTimeStamp.js";
 
-const tableInit = async () => {
+const initTable = async () => {
   try {
     const createTableQuery = `
     CREATE TABLE IF NOT EXISTS users (
@@ -45,4 +45,4 @@ const tableInit = async () => {
   }
 };
 
-export default tableInit;
+export default initTable;
