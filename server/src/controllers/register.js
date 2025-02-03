@@ -26,7 +26,11 @@ const register = async (req, res) => {
   console.log(`${getCurrentTimestamp()} 🔓 Incoming password successfully validated!`);
 
   try {
-    await createUser(email, password);
+    const result = await createUser(email, password);
+
+    if (!result.success) {
+      return res.status(409).json({ error: result.message });
+    }
 
     res.status(200).json({ message: "The user was successfully registered!" });
   } catch (error) {
