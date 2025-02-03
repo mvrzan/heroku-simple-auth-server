@@ -1,17 +1,17 @@
 import { getCurrentTimestamp } from "../utils/getCurrentTimeStamp.js";
+import createUser from "../database/create-user.js";
 
-const register = (req, res) => {
+const register = async (req, res) => {
   console.log(`${getCurrentTimestamp()} 📨 Register new user request received...`);
 
-  const username = req.body?.username;
+  const email = req.body?.email;
   const password = req.body?.password;
 
   try {
-    console.log(`${getCurrentTimestamp()} ✅ The user was successfully registered!`);
+    await createUser(email, password);
 
-    res.status(200).json("The user was successfully registered!");
+    res.status(200).json({ message: "The user was successfully registered!" });
   } catch (error) {
-    console.error("❌ Error occurred:", error);
     res.status(500).send(error);
   }
 };
