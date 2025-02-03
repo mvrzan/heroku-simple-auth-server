@@ -14,14 +14,16 @@ const register = async (req, res) => {
     return res.status(400).json({ error: "Invalid email address" });
   }
 
-  const { isValid, errorMessage } = isPasswordValid(password);
+  console.log(`${getCurrentTimestamp()} ✉️ Incoming email successfully validated!`);
+
+  const { isValid, validationMessage } = isPasswordValid(password);
 
   if (!isValid) {
-    console.error(`${getCurrentTimestamp()} ❌ Invalid password`, errorMessage);
-    return res.status(400).json({ error: "Invalid password", errorMessage });
+    console.error(`${getCurrentTimestamp()} ❌ Invalid password`, validationMessage);
+    return res.status(400).json({ error: "Invalid password", validationMessage });
   }
 
-  console.log(`${getCurrentTimestamp()} ✉️ Incoming email successfully validated!`);
+  console.log(`${getCurrentTimestamp()} 🔓 Incoming password successfully validated!`);
 
   try {
     await createUser(email, password);
