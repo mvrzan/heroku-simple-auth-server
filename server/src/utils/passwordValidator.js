@@ -17,31 +17,31 @@ const isPasswordValid = (password) => {
 
   const failedRequirement = Object.entries(validationResults).find(([_key, value]) => !value);
 
-  let errorMessage = "";
+  let validationMessage = "";
 
-  if (failedRequirement?.length > 0) {
+  if (failedRequirement) {
     switch (failedRequirement[0]) {
       case "minLength":
-        errorMessage = "The password must be at least 8 characters long.";
+        validationMessage = "The password must be at least 8 characters long.";
         break;
       case "hasUpperCase":
-        errorMessage = "The password must contain at least one uppercase letter.";
+        validationMessage = "The password must contain at least one uppercase letter.";
         break;
       case "hasLowerCase":
-        errorMessage = "The password must contain at least one lowercase letter.";
+        validationMessage = "The password must contain at least one lowercase letter.";
         break;
       case "hasDigit":
-        errorMessage = "The password must contain at least one digit.";
+        validationMessage = "The password must contain at least one digit.";
         break;
       case "hasSpecialChar":
-        errorMessage = "The password must contain at least one special character.";
+        validationMessage = "The password must contain at least one special character.";
         break;
       default:
-        errorMessage = "The password does not meet the required criteria.";
+        validationMessage = "The password does not meet the required criteria.";
     }
   }
 
-  return { isValid, errorMessage };
+  return { isValid, validationMessage };
 };
 
 export default isPasswordValid;
