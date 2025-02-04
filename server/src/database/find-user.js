@@ -1,7 +1,7 @@
 import postgresPool from "./postgres-connection.js";
 import { getCurrentTimestamp } from "../utils/getCurrentTimestamp.js";
 
-const findUser = async (email) => {
+const findUserByEmail = async (email) => {
   try {
     const checkUserQuery = `
     SELECT * FROM users WHERE email = $1;
@@ -13,14 +13,17 @@ const findUser = async (email) => {
       return null;
     }
 
-    const userPassword = checkUserResult.rows[0].password;
+    const password = checkUserResult.rows[0].password;
 
     console.log(`${getCurrentTimestamp()} 🔍 A user was found!`);
-    return { password: userPassword };
+    return { password };
   } catch (error) {
-    console.error(`${getCurrentTimestamp()} ❌ An error occurred when searching for the email: ${email}`, error);
+    console.error(
+      `${getCurrentTimestamp()} ❌ An error occurred when searching for the email: ${email}. Error: ${error.message}`,
+      error
+    );
     throw error;
   }
 };
 
-export default findUser;
+export default findUserByEmail;
