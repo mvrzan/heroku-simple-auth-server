@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt";
 import postgresPool from "./postgres-connection.js";
 import { getCurrentTimestamp } from "../utils/getCurrentTimeStamp.js";
 
@@ -14,12 +15,15 @@ const createUser = async (email, password) => {
       return { success: false, message: "User already exists" };
     }
 
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
     // Insert the new user
     const createUserQuery = `
       INSERT INTO users (email, password, created_at)
       VALUES ($1, $2, $3);
     `;
-    const values = [email, password, new Date(getCurrentTimestamp()).toISOString()];
+    const values = [email, hashedPassword, new Date(getCurrentTimestamp()).toISOString()];
 
     await postgresPool.query(createUserQuery, values);
 
