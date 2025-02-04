@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import findUser from "../database/find-user.js";
+import findUserByEmail from "../database/find-user.js";
 import isEmailValid from "../utils/emailValidator.js";
 import { getCurrentTimestamp } from "../utils/getCurrentTimestamp.js";
 
@@ -15,7 +15,7 @@ const login = async (req, res) => {
   }
 
   try {
-    const user = await findUser(email);
+    const user = await findUserByEmail(email);
 
     if (!user) {
       return res.status(400).json({ error: `User not found for email ${email}` });
