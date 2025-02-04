@@ -1,7 +1,7 @@
-import { getCurrentTimestamp } from "../utils/getCurrentTimeStamp.js";
 import createUser from "../database/create-user.js";
 import isEmailValid from "../utils/emailValidator.js";
 import isPasswordValid from "../utils/passwordValidator.js";
+import { getCurrentTimestamp } from "../utils/getCurrentTimeStamp.js";
 
 const register = async (req, res) => {
   console.log(`${getCurrentTimestamp()} 📨 Register new user request received...`);
