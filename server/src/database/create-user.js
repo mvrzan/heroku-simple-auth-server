@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import postgresPool from "./postgres-connection.js";
-import { getCurrentTimestamp } from "../utils/getCurrentTimeStamp.js";
+import { getCurrentTimestamp } from "../utils/getCurrentTimestamp.js";
 
 const createUser = async (email, password) => {
   try {

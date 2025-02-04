@@ -3,7 +3,7 @@ import cors from "cors";
 import express from "express";
 import bodyParser from "body-parser";
 import router from "./src/routes/route-collection.js";
-import { getCurrentTimestamp } from "./src/utils/getCurrentTimeStamp.js";
+import { getCurrentTimestamp } from "./src/utils/getCurrentTimestamp.js";
 import initTable from "./src/database/init-table.js";
 
 const app = express();

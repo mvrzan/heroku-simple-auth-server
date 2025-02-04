@@ -1,5 +1,5 @@
 import pg from "pg";
-import { getCurrentTimestamp } from "../utils/getCurrentTimeStamp.js";
+import { getCurrentTimestamp } from "../utils/getCurrentTimestamp.js";
 
 const { Pool } = pg;
 

@@ -1,5 +1,5 @@
 import postgresPool from "./postgres-connection.js";
-import { getCurrentTimestamp } from "../utils/getCurrentTimeStamp.js";
+import { getCurrentTimestamp } from "../utils/getCurrentTimestamp.js";
 
 const initTable = async () => {
   try {
