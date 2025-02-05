@@ -22,11 +22,11 @@ const generateJwt = (userEmail) => {
 
     const fullPayload = { ...payload };
 
-    const encodedPayload = Buffer.from(JSON.stringify(fullPayload)).toString("base64");
+    const encodedPayload = Buffer.from(JSON.stringify(fullPayload)).toString("base64url");
 
     const signature = crypto.createHmac("sha256", sharedSecret).update(`${encodedHeader}.${encodedPayload}`).digest();
 
-    const encodedSignature = signature.toString("base64");
+    const encodedSignature = signature.toString("base64url");
 
     const jwtToken = `${encodedHeader}.${encodedPayload}.${encodedSignature}`;
 
