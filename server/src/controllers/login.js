@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import generateJwt from "../utils/generateJwt.js";
 import findUserByEmail from "../database/find-user.js";
 import isEmailValid from "../utils/emailValidator.js";
 import { getCurrentTimestamp } from "../utils/getCurrentTimestamp.js";
@@ -28,8 +29,10 @@ const login = async (req, res) => {
       return res.status(403).json({ error: "Incorrect password" });
     }
 
+    const token = generateJwt(email);
+
     console.log(`${getCurrentTimestamp()} ✅ User login was successful!`);
-    res.status(200).json({ message: "User login was successful!" });
+    res.status(200).json({ message: "User login was successful!", token });
   } catch (error) {
     console.error(`${getCurrentTimestamp()} ${error}`);
     res.status(500).send(error);
