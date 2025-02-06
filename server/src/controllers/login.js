@@ -5,12 +5,12 @@ import isEmailValid from "../utils/emailValidator.js";
 import { getCurrentTimestamp } from "../utils/getCurrentTimestamp.js";
 
 const login = async (req, res) => {
-  console.log(`${getCurrentTimestamp()} 🔑 Login request received...`);
-
-  const email = req.body?.email;
-  const password = req.body?.password;
-
   try {
+    console.log(`${getCurrentTimestamp()} 🔑 Login request received...`);
+
+    const email = req.body?.email;
+    const password = req.body?.password;
+
     if (!isEmailValid(email)) {
       console.error(`${getCurrentTimestamp()} ❌ Invalid email address: ${email}`);
       return res.status(400).json({ error: `Invalid email address: ${email}` });
