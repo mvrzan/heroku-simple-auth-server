@@ -14,7 +14,7 @@ const generateJwt = (userEmail) => {
       iat: ~~(issueTime.getTime() / 1000),
       nbf: ~~(issueTime.getTime() / 1000),
       exp: ~~(issueTime.getTime() / 1000 + 24 * 60 * 60),
-      aud: "frontend",
+      aud: process.env.JWT_AUDIENCE,
     };
     const sharedSecret = process.env.JWT_SHARED_SECRET;
 
