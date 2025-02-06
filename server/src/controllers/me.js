@@ -12,7 +12,12 @@ const me = (req, res) => {
       return res.status(400).json({ error: "JWT was not provided in the request!" });
     }
 
-    validateJwt(jwtToken);
+    const validationResult = validateJwt(jwtToken);
+
+    if (!validationResult.valid) {
+      console.error(`${getCurrentTimestamp()} ❌ JWT validation failed: ${validationResult.error}`);
+      return res.status(400).json({ error: validationResult.error });
+    }
 
     console.log(`${getCurrentTimestamp()} ✅ JWT successfully validated!`);
     res.status(200).json({ message: "JWT successfully validated!" });
