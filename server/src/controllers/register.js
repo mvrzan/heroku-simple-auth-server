@@ -4,12 +4,12 @@ import isPasswordValid from "../utils/passwordValidator.js";
 import { getCurrentTimestamp } from "../utils/getCurrentTimestamp.js";
 
 const register = async (req, res) => {
-  console.log(`${getCurrentTimestamp()} 📨 Register new user request received...`);
-
-  const email = req.body?.email;
-  const password = req.body?.password;
-
   try {
+    console.log(`${getCurrentTimestamp()} 📨 Register new user request received...`);
+
+    const email = req.body?.email;
+    const password = req.body?.password;
+
     if (!isEmailValid(email)) {
       console.error(`${getCurrentTimestamp()} ❌ Invalid email address: ${email}`);
       return res.status(400).json({ error: "Invalid email address" });
