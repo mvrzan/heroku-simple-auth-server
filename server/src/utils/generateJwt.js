@@ -18,7 +18,7 @@ const generateJwt = (userEmail) => {
     };
     const sharedSecret = process.env.JWT_SHARED_SECRET;
 
-    const encodedHeader = Buffer.from(JSON.stringify(header)).toString("base64");
+    const encodedHeader = Buffer.from(JSON.stringify(header)).toString("base64url");
 
     const fullPayload = { ...payload };
 
