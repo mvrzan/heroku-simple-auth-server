@@ -9,23 +9,22 @@ const register = async (req, res) => {
   const email = req.body?.email;
   const password = req.body?.password;
 
-  if (!isEmailValid(email)) {
-    console.error(`${getCurrentTimestamp()} ❌ Invalid email address: ${email}`);
-    return res.status(400).json({ error: "Invalid email address" });
-  }
-
-  console.log(`${getCurrentTimestamp()} ✉️ Incoming email successfully validated!`);
-
-  const { isValid, validationMessage } = isPasswordValid(password);
-
-  if (!isValid) {
-    console.error(`${getCurrentTimestamp()} ❌ Invalid password`, validationMessage);
-    return res.status(400).json({ error: "Invalid password", validationMessage });
-  }
-
-  console.log(`${getCurrentTimestamp()} 🔓 Incoming password successfully validated!`);
-
   try {
+    if (!isEmailValid(email)) {
+      console.error(`${getCurrentTimestamp()} ❌ Invalid email address: ${email}`);
+      return res.status(400).json({ error: "Invalid email address" });
+    }
+
+    console.log(`${getCurrentTimestamp()} ✉️ Incoming email successfully validated!`);
+
+    const { isValid, validationMessage } = isPasswordValid(password);
+
+    if (!isValid) {
+      console.error(`${getCurrentTimestamp()} ❌ Invalid password`, validationMessage);
+      return res.status(400).json({ error: "Invalid password", validationMessage });
+    }
+
+    console.log(`${getCurrentTimestamp()} 🔓 Incoming password successfully validated!`);
     const result = await createUser(email, password);
 
     if (!result.success) {
