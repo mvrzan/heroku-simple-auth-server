@@ -1,38 +1,50 @@
 import crypto from "crypto";
 
 const validateJwt = (jwtToken) => {
-  const splitToken = jwtToken.split(".");
+  try {
+    const splitToken = jwtToken.split(".");
 
-  const encodedHeader = splitToken[0];
-  const header = JSON.parse(Buffer.from(encodedHeader, "base64url").toString("utf-8"));
+    if (splitToken.length !== 3) {
+      return { valid: false, error: "Invalid JWT format" };
+    }
 
-  const encodedPayload = splitToken[1];
-  const payload = JSON.parse(Buffer.from(encodedPayload, "base64url").toString("utf-8"));
+    const encodedHeader = splitToken[0];
+    const header = JSON.parse(Buffer.from(encodedHeader, "base64url").toString("utf-8"));
 
-  const encodedSignature = splitToken[2];
+    const encodedPayload = splitToken[1];
+    const payload = JSON.parse(Buffer.from(encodedPayload, "base64url").toString("utf-8"));
 
-  if (header.alg !== "HS256") {
-    return false;
+    const encodedSignature = splitToken[2];
+
+    if (header.alg !== "HS256") {
+      return { valid: false, error: "Invalid algorithm" };
+    }
+
+    if (payload.iss !== process.env.JWT_ISSUER) {
+      return { valid: false, error: "Invalid issuer" };
+    }
+
+    if (payload.aud !== process.env.JWT_AUDIENCE) {
+      return { valid: false, error: "Invalid audience" };
+    }
+
+    const now = new Date().getTime() / 1000;
+    if (now < payload.nbf || now > payload.exp) {
+      return { valid: false, error: "Token is not yet valid or has expired" };
+    }
+
+    const expectedSignature = Buffer.from(
+      crypto.createHmac("sha256", process.env.JWT_SHARED_SECRET).update(`${encodedHeader}.${encodedPayload}`).digest()
+    ).toString("base64url");
+
+    if (expectedSignature !== encodedSignature) {
+      return { valid: false, error: "Invalid signature" };
+    }
+
+    return { valid: true };
+  } catch (error) {
+    return { valid: false, error: "An error occurred during JWT validation" };
   }
-
-  if (payload.iss !== process.env.JWT_ISSUER) {
-    return false;
-  }
-
-  if (payload.aud !== process.env.JWT_AUDIENCE) {
-    return false;
-  }
-
-  const now = new Date().getTime() / 1000;
-  if (now < payload.nbf || now > payload.exp) {
-    return false;
-  }
-
-  const expectedSignature = Buffer.from(
-    crypto.createHmac("sha256", process.env.JWT_SHARED_SECRET).update(`${encodedHeader}.${encodedPayload}`).digest()
-  ).toString("base64url");
-
-  return expectedSignature === encodedSignature;
 };
 
 export default validateJwt;
