@@ -14,6 +14,9 @@ This project is a simple authentication server built with Node.js and Express. I
   - [Technologies used](#technologies-used)
 - [Configuration](#configuration)
   - [Requirements](#requirements)
+  - [Setup](#setup)
+    - [Local environment configuration](#local-environment-configuration)
+    - [Development](#development)
   - [Deployment](#deployment)
       - [Can I deploy this anywhere else other than Heroku?](#can-i-deploy-this-anywhere-else-other-than-heroku)
 - [License](#license)
@@ -94,6 +97,64 @@ To run this application locally, you will need the following:
 - npm version 10.0.0 or later installed (type `npm -v` in your terminal to check). Node.js includes `npm`
 - git installed. Follow the instructions to [install git](https://git-scm.com/downloads)
 - [deployment only] A [Heroku account](https://signup.heroku.com/)
+
+## Setup
+
+### Local environment configuration
+
+The first step is to clone the repository and install the project dependencies for both server and client folders via a terminal interface by running the `npm install` in the proper folder:
+
+```
+cd heroku-simple-auth-server
+cd server
+npm install
+```
+
+The second step is to create a `.env` file in server folder. Find the `.env.example` file, copy it and rename it to `.env`.
+
+```
+cd salesforce-einstein-personalization-llm/server
+cp .env.example .env
+```
+
+Edit the newly created `.env` file and update the variables with your specific information.
+
+**Server:**
+
+```
+# Database credentials
+DATABASE_USER=
+DATABASE_PASSWORD=
+DATABASE_HOST=
+DATABASE_PORT=
+DATABASE_NAME=
+
+# JSON Web Token details
+JWT_ISSUER=
+JWT_AUDIENCE=
+JWT_SHARED_SECRET=
+```
+
+The `Database credentials` refer to the Postgres connection details. The `JSON Web Token details` can be be whatever you want for the sake of local testing.
+
+> NOTE: If you want to deploy this application to Heroku, you will have to create all of the above variables (for both the client and the server) as Heroku environment variables. This can be done via the [command line or the Heroku Dashboard UI](https://devcenter.heroku.com/articles/config-vars).
+
+Once all of this is done, you are ready to run the application locally!
+
+### Development
+
+To run the application locally, use the command line, navigate to the `server` folder, ensure the dependencies are installed properly, and run the following:
+
+Server:
+
+```
+cd heroku-simple-auth-server/server
+npm run dev
+```
+
+This will automatically run the Express development server. Your server will be available at `http://localhost:3000`.
+
+When you make changes to your code, the server will automatically restart to fetch new changes.
 
 ## Deployment
 
