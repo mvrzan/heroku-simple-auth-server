@@ -110,13 +110,6 @@ cd server
 npm install
 ```
 
-The second step is to create a `.env` file in server folder. Find the `.env.example` file, copy it and rename it to `.env`.
-
-```
-cd salesforce-einstein-personalization-llm/server
-cp .env.example .env
-```
-
 Edit the newly created `.env` file and update the variables with your specific information.
 
 **Server:**
