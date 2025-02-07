@@ -15,7 +15,7 @@ This project is a simple authentication server built with Node.js and Express. I
 - [Configuration](#configuration)
   - [Requirements](#requirements)
   - [Deployment](#deployment)
-    - [Can I deploy this anywhere else other than Heroku?](#can-i-deploy-this-anywhere-else-other-than-heroku)
+      - [Can I deploy this anywhere else other than Heroku?](#can-i-deploy-this-anywhere-else-other-than-heroku)
 - [License](#license)
 - [Disclaimer](#disclaimer)
 
@@ -72,6 +72,8 @@ The web server offers the following endpoints:
 ## How does it work?
 
 ### Architecture diagram
+
+![](./screenshots/architecture-diagram.png)
 
 ## Technologies used
 
