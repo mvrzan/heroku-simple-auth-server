@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import generateJwt from "../utils/generateJwt.js";
+import { generateJwt } from "../utils/jwtHelper.js";
 import findUserByEmail from "../database/find-user.js";
 import isEmailValid from "../utils/emailValidator.js";
 import { getCurrentTimestamp } from "../utils/getCurrentTimestamp.js";

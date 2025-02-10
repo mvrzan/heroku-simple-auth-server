@@ -1,5 +1,5 @@
 import { getCurrentTimestamp } from "../utils/getCurrentTimestamp.js";
-import validateJwt from "../utils/validateJwt.js";
+import { validateJwt } from "../utils/jwtHelper.js";
 
 const validateJwtMiddleware = (req, res, next) => {
   console.log(`${getCurrentTimestamp()} 🧪 Validation request received...`);
