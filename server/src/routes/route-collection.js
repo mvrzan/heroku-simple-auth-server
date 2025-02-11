@@ -8,6 +8,6 @@ const router = Router();
 
 router.post("/v1/login", login);
 router.post("/v1/register", register);
-router.post("/v1/me", validateJwtMiddleware, me);
+router.get("/v1/me", validateJwtMiddleware, me);
 
 export default router;
